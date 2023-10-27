@@ -313,7 +313,8 @@ def original_autoencoder(size=60, kl=False, latentDim=16):
 
     opt = tf.keras.optimizers.Adam(learning_rate=lr_schedule)
 
-    autoencoder.compile(loss="mse", optimizer=opt, metrics=['kullback_leibler_divergence' if kl else 'accuracy'])
+#    autoencoder.compile(loss="mse", optimizer=opt, metrics=['kullback_leibler_divergence' if kl else 'accuracy'])
+    autoencoder.compile(loss="kullback_leibler_divergence", optimizer=opt, metrics=['kullback_leibler_divergence' if kl else 'accuracy'])
     return autoencoder
 
 
