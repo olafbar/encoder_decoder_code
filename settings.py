@@ -4,3 +4,4 @@ INIT_LR = 1e-3
 BS = 32
 USE_MODEL = False
 AUG = 100
+KULLBACK = True
