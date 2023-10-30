@@ -298,26 +298,6 @@ def prepare_dataset_old(args, augmentation=False):
 
     return train_set, validation_set, test_set
 
-def custom_loss(y_true, y_pred):
-    import numpy as np
-    eps = 10**(-4)   
-    # print(y_true.shape)#reshape 
-    y_true_r=tf.reshape(y_true,(-1,1))
-    y_pred_r=tf.reshape(y_pred,(-1,1))    
-    # y_true_r=y_true
-    # y_pred_r=y_pred     
-    # print(y_t_r.shape)
-    y_t=tf.math.divide(y_true_r,tf.math.reduce_sum(y_true_r))
-    y_p=tf.math.divide(y_pred_r,tf.math.reduce_sum(y_pred_r))
-    y_p=tf.math.add(y_p,eps)
-    y_t=tf.math.add(y_t,eps)
-    # kl = lambda x,y: x * tf.math.log(x / y) - x + y
-    kl = lambda x,y: tf.math.add(tf.math.subtract(tf.math.multiply(x,tf.math.divide(x, y)),x),y)
-
-   
-    return tf.math.reduce_sum(kl(y_t, y_p))
-    # return tf.math.reduce_sum(kl(nt_hist, np_hist))
-################
 
 def original_autoencoder(size=60, kl=False, latentDim=16):
     from pyimagesearch.convautoencoder import ConvAutoencoder
@@ -334,11 +314,7 @@ def original_autoencoder(size=60, kl=False, latentDim=16):
     opt = tf.keras.optimizers.Adam(learning_rate=lr_schedule)
 
 #    autoencoder.compile(loss="mse", optimizer=opt, metrics=['kullback_leibler_divergence' if kl else 'accuracy'])
-#   autoencoder.compile(loss="kullback_leibler_divergence", optimizer=opt, metrics=['kullback_leibler_divergence' if kl else 'accuracy'])
-
-    autoencoder.compile(loss=[custom_loss if KULLBACK else 'mse']
-                        , optimizer=opt
-                        , metrics=['kullback_leibler_divergence' if KULLBACK else 'accuracy'])
+    autoencoder.compile(loss="kullback_leibler_divergence", optimizer=opt, metrics=['kullback_leibler_divergence' if kl else 'accuracy'])
     return autoencoder
 
 
