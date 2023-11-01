@@ -334,12 +334,12 @@ def original_autoencoder(size=60, kl=False, latentDim=16):
     opt = tf.keras.optimizers.Adam(learning_rate=lr_schedule)
 
 #    autoencoder.compile(loss="mse", optimizer=opt, metrics=['kullback_leibler_divergence' if kl else 'accuracy'])
-#   autoencoder.compile(loss="kullback_leibler_divergence", optimizer=opt, metrics=['kullback_leibler_divergence' if kl else 'accuracy'])
-
-    autoencoder.compile(loss=[custom_loss if KULLBACK else 'mse']
-                        , optimizer=opt
-                        , metrics=['kullback_leibler_divergence' if KULLBACK else 'accuracy'])
-    return autoencoder
+   autoencoder.compile(loss=custom_loss, optimizer=opt, metrics=['kullback_leibler_divergence' if kl else 'accuracy'])
+    print('kul',KULLBA)
+#    autoencoder.compile(loss=[custom_loss if KULLBACK else 'mse']
+#                        , optimizer=opt
+#                        , metrics=['kullback_leibler_divergence' if KULLBACK else 'accuracy'])
+#    return autoencoder
 
 
 def train_or_cache(train_set, autoencoder, fncache=None, force_train=False, epochs=EPOCHS, batch_size=BS, shuffle=False, validation_set=None, kl=False, latentDim=16):
