@@ -339,7 +339,7 @@ def original_autoencoder(size=60, kl=False, latentDim=16):
 #    autoencoder.compile(loss=[custom_loss if KULLBACK else 'mse']
 #                        , optimizer=opt
 #                        , metrics=['kullback_leibler_divergence' if KULLBACK else 'accuracy'])
-#    return autoencoder
+    return autoencoder
 
 
 def train_or_cache(train_set, autoencoder, fncache=None, force_train=False, epochs=EPOCHS, batch_size=BS, shuffle=False, validation_set=None, kl=False, latentDim=16):
