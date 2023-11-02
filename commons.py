@@ -388,7 +388,7 @@ def train_or_cache(train_set, autoencoder, fncache=None, force_train=False, epoc
         decoder.compile(loss="mse", optimizer=opt, metrics=['accuracy'])
         decoder.save(fn.replace('.h5', '-decoder.h5'))
 
-    N = np.arange(0, EPOCHS)
+    N = np.arange(0, epochs)
     plt.style.use("ggplot")
     plt.figure()
     plt.plot(N, H.history["loss"], label="train_loss")
@@ -401,7 +401,7 @@ def train_or_cache(train_set, autoencoder, fncache=None, force_train=False, epoc
     plt.savefig(fn.replace('.h5', '_loss.png'))
 
     if kl:
-        N = np.arange(0, EPOCHS)
+        N = np.arange(0, epochs)
         plt.style.use("ggplot")
         plt.figure()
         plt.plot(N, H.history["kullback_leibler_divergence"], label="kullback_leibler_divergence")
@@ -413,7 +413,7 @@ def train_or_cache(train_set, autoencoder, fncache=None, force_train=False, epoc
         plt.legend(loc="lower left")
         plt.savefig(fn.replace('.h5', '_kullback_leibler_divergence.png'))
     else:
-        N = np.arange(0, EPOCHS)
+        N = np.arange(0, epochs)
         plt.style.use("ggplot")
         plt.figure()
         plt.plot(N, H.history["accuracy"], label="accuracy")
