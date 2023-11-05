@@ -335,7 +335,7 @@ def original_autoencoder(size=60, kl=False, latentDim=16):
 
 #    autoencoder.compile(loss="mse", optimizer=opt, metrics=['kullback_leibler_divergence' if kl else 'accuracy'])
     autoencoder.compile(loss=custom_loss, optimizer=opt, metrics=['kullback_leibler_divergence' if kl else 'accuracy'])
-#    print('kul',KULLBA)
+#    print('kul',KULLBACK
 #    autoencoder.compile(loss=[custom_loss if KULLBACK else 'mse']
 #                        , optimizer=opt
 #                        , metrics=['kullback_leibler_divergence' if KULLBACK else 'accuracy'])
